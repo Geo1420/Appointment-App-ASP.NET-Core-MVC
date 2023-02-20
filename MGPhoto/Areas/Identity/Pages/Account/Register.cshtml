@@ -1,0 +1,122 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+ <head>
+     <link rel="stylesheet" href="~/css/Login.css" asp-append-version="true" />
+         <style>
+      /* The message box is shown when the user clicks on the password field */
+      #message {
+        display: none;
+        background: transparent;
+        color: rgb(255, 244, 244);
+        position: relative;
+        padding: 5px;
+        margin-top: 10px;
+      }
+
+      #message p {
+        background: none;
+        padding: 1px 15px;
+        font-size: 18px;
+      }
+
+      /* Add a green text color and a checkmark when the requirements are right */
+      .valid {
+        color: rgb(72, 255, 0);
+      }
+
+      .valid:before {
+        position: relative;
+        left: -35px;
+        content: "✔";
+        color: green;
+      }
+
+      /* Add a red text color and an "x" when the requirements are wrong */
+      .invalid {
+        color: rgb(255, 0, 0);
+      }
+
+      .invalid:before {
+        position: relative;
+        left: -35px;
+        content: "✖";
+        color: red;
+      }
+    </style>
+ </head>
+   <section>
+       <div class="imgBx">
+            <img src="~/Home/registerWallpaper2.jpg" alt="">
+        </div>
+            <div class="contentBx">
+                <div class="formBx">
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <h2>Create a new account.</h2>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="inputBx">
+                <span>Email</span>
+                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="Email.."/>
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="inputBx">
+                <span>Password</span>
+                <input asp-for="Input.Password" class="form-control" id="psw" autocomplete="new-password" aria-required="true" placeholder="Password.."/>
+                
+            </div>
+            <div class="inputBx">
+                <span>Repeat password</span>
+                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Confirm Password.."/>
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="inputBx">
+                <button id="registerSubmit" type="submit" class="sigup-button">Register</button>
+            </div>
+            <div id="message">
+                  <p id="letter" class="invalid"><b>A lowercase letter </b></p>
+                  <p id="capital" class="invalid"><b>A capital (uppercase) letter</b></p>
+                  <p id="number" class="invalid"><b>A number</b></p>
+                  <p id="length" class="invalid"><b>Minimum 8 characters</b></p>
+                </div>
+        </form>
+        </div>
+      </div>
+    </section>
+    <!--<div class="col-md-6 col-md-offset-2">
+        <section>
+            <h3>Use another service to register.</h3>
+            <hr />
+            @{
+                if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                {
+                    <div>
+                        <p>
+                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
+                            about setting up this ASP.NET application to support logging in via external services</a>.
+                        </p>
+                    </div>
+                }
+                else
+                {
+                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                        <div>
+                            <p>
+                                @foreach (var provider in Model.ExternalLogins)
+                                {
+                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                }
+                            </p>
+                        </div>
+                    </form>
+                }
+            }
+        </section>
+    </div>-->
+
+ <script src="~/js/passwordVal.js" type="text/javascript"></script>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

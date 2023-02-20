@@ -1,0 +1,261 @@
+﻿.hello {
+    opacity: 1;
+}
+
+.full {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+    .full .content {
+        background-color: rgba(0,0,0,0.75);
+        height: 400px;
+        width: 100%;
+        display: grid;
+    }
+
+        .full .content img {
+            left: 50%;
+            transform: translate3d(0, 0, 0);
+            animation: zoomin 1s ease;
+            max-width: 100%;
+            max-height: 100%;
+            margin: auto;
+        }
+
+.gallery {
+    display: grid;
+    grid-column-gap: 8px;
+    grid-row-gap: 8px;
+    grid-template-columns: repeat(auto-fit,minmax(250px, 1fr));
+    grid-auto-rows: auto;
+}
+
+    .gallery img {
+        max-width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 0 16px #333;
+        transition: all 1.5s ease;
+    }
+
+        .gallery img:hover {
+            box-shadow: 0 0 32px #333;
+        }
+
+    .gallery .content {
+        padding: 4px;
+    }
+
+    .gallery .gallery-item {
+        transition: grid-row-start 300ms linear;
+        transition: transform 300ms ease;
+        transition: all 0.5s ease;
+        cursor: pointer;
+    }
+
+        .gallery .gallery-item:hover {
+            transform: scale(1.025);
+        }
+
+@media (max-width: 600px) {
+    .gallery {
+        grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+    }
+}
+
+@media (max-width: 400px) {
+    .gallery {
+        grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
+    }
+}
+
+@-moz-keyframes zoomin {
+    0% {
+        max-width: 50%;
+        transform: rotate(-30deg);
+        filter: blur(4px);
+    }
+
+    30% {
+        filter: blur(4px);
+        transform: rotate(-80deg);
+    }
+
+    70% {
+        max-width: 50%;
+        transform: rotate(45deg);
+    }
+
+    100% {
+        max-width: 100%;
+        transform: rotate(0deg);
+    }
+}
+
+@-webkit-keyframes zoomin {
+    0% {
+        max-width: 50%;
+        transform: rotate(-30deg);
+        filter: blur(4px);
+    }
+
+    30% {
+        filter: blur(4px);
+        transform: rotate(-80deg);
+    }
+
+    70% {
+        max-width: 50%;
+        transform: rotate(45deg);
+    }
+
+    100% {
+        max-width: 100%;
+        transform: rotate(0deg);
+    }
+}
+
+@-o-keyframes zoomin {
+    0% {
+        max-width: 50%;
+        transform: rotate(-30deg);
+        filter: blur(4px);
+    }
+
+    30% {
+        filter: blur(4px);
+        transform: rotate(-80deg);
+    }
+
+    70% {
+        max-width: 50%;
+        transform: rotate(45deg);
+    }
+
+    100% {
+        max-width: 100%;
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes zoomin {
+    0% {
+        max-width: 50%;
+        transform: rotate(-30deg);
+        filter: blur(4px);
+    }
+
+    30% {
+        filter: blur(4px);
+        transform: rotate(-80deg);
+    }
+
+    70% {
+        max-width: 50%;
+        transform: rotate(45deg);
+    }
+
+    100% {
+        max-width: 100%;
+        transform: rotate(0deg);
+    }
+}
+
+/*Gallery*/
+#check1 {
+    display: none;
+}
+
+#check2 {
+    display: none;
+}
+
+#check3 {
+    display: none;
+}
+
+#check4 {
+    display: none;
+}
+
+label {
+    display: inline-block;
+    height: 100%;
+    margin: 0 20px;
+    line-height: 60px;
+    font-size: 20px;
+    color: rgb(255, 157, 157);
+    cursor: pointer;
+    transition: color 0.5s;
+}
+
+.top-content {
+    background-color: transparent;
+    width: 100%;
+    margin: auto;
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+label:hover {
+    color: #000;
+}
+
+/*Filtrare*/
+
+#check1:checked ~ .gallery .gallery-item .content {
+    opacity: 1;
+    transform: scale(1);
+    position: relative;
+    transition: 0.5s;
+}
+
+#check2:checked ~ .gallery .gallery-item #wedding {
+    transform: scale(1);
+    opacity: 1;
+    position: relative;
+    transition: 0.5s;
+}
+
+#check2:checked ~ .gallery #natura,
+#check2:checked ~ .gallery #profile {
+    opacity: 0;
+    transform: scale(0);
+    position: absolute;
+    transition: 0.5s;
+}
+
+#check3:checked ~ .gallery #natura {
+    transform: scale(1);
+    opacity: 1;
+    position: relative;
+    transition: 0.5s;
+}
+
+#check3:checked ~ .gallery #wedding,
+#check3:checked ~ .gallery #profile {
+    opacity: 0;
+    transform: scale(0);
+    position: absolute;
+    transition: 0.5s;
+}
+
+#check4:checked ~ .gallery #profile {
+    transform: scale(1);
+    opacity: 1;
+    position: relative;
+    transition: 0.5s;
+}
+
+#check4:checked ~ .gallery #wedding,
+#check4:checked ~ .gallery #natura {
+    opacity: 0;
+    transform: scale(0);
+    position: absolute;
+    transition: 0.5s;
+}

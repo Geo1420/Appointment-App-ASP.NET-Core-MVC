@@ -1,0 +1,46 @@
+﻿@model IEnumerable<MGPhoto.Models.Appointment>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<p>
+    <a asp-action="Create">Create A New Appointement</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <span>Name</span>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Message)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailUser)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Message)
+            </td>
+            <td>
+                <a asp-controller="ReplyMessages" asp-action="Create" asp-route-id="@item.IdAppointment"> <i class="fa fa-reply"></i> Reply</a> |
+                <a asp-action="Edit" asp-route-id="@item.IdAppointment">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdAppointment">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdAppointment">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

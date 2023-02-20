@@ -1,0 +1,118 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> userManager
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MGPhoto</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Footer.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Navbar.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/MGPhoto.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="navbar_container">
+                <!--Navbar Logo-->
+                <div class="navbar_logo"> 
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="logo"><i class="fa fa-camera-retro" style="font-size: 48px"></i>PhotoM.G.</a>
+                </div>
+                @*<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MGPhoto</a>*@
+                <!--Span-->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <ul class="navbar_menu">
+                    @if (SignInManager.IsSignedIn(User) && User.IsInRole("User"))
+                    {
+                        <li class="navbar_item">
+                            <a class="navbar_link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="navbar_item">
+                            <a class="navbar_link" asp-area="" asp-controller="GalleryPhotoes" asp-action="Gallery">Gallery</a>
+                        </li>
+                        <li class="navbar_item">
+                            <a class="navbar_link" asp-area="" asp-controller="Contacts" asp-action="Create">Contact</a>
+                        </li>
+                        <li class="navbar_item">
+                            <a class="navbar_link" asp-area="" asp-controller="Appointments" asp-action="Create">Book</a>
+                        </li>
+                        <li class="navbar_item">
+                            <a class="navbar_link" asp-area="" asp-controller="Feedbacks" asp-action="FeedbackList">Feedbacks</a>
+                        </li>
+                        <li class="navbar_item">
+                            <a class="navbar_link" asp-area="" asp-controller="ReplyMessages" asp-action="Inbox">Inbox</a>
+                        </li>
+                    }else if( SignInManager.IsSignedIn(User) && User.IsInRole("Administrator")){
+                        <li class="navbar_item">
+                            <a class="navbar_link" asp-area="" asp-controller="Contacts" asp-action="Index">Messages</a>
+                        </li>
+                        <li class="navbar_item">
+                            <a class="navbar_link" asp-area="" asp-controller="Feedbacks" asp-action="FeedbackList">Feedbacks</a>
+                        </li>
+                        <li class="navbar_item">
+                            <a class="navbar_link" asp-area="" asp-controller="Appointments" asp-action="Index">Appoint.</a>
+                        </li>
+                        <li class="navbar_item">
+                            <a class="navbar_link" asp-area="" asp-controller="GalleryPhotoes" asp-action="Index">ImgManager</a>
+                        </li>
+                        <li class="navbar_item">
+                            <a class="navbar_link" asp-area="" asp-controller="GalleryPhotoes" asp-action="Gallery">Gallery</a>
+                        </li>
+                        <li class="navbar_item">
+                            <a class="navbar_link" asp-area="" asp-controller="ReplyMessages" asp-action="Index">SendedMess</a>
+                        </li>
+                    }else
+                    {
+                        <li class="navbar_item">
+                            <a class="navbar_link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="navbar_item">
+                            <a class="navbar_link" asp-area="" asp-controller="About" asp-action="Index">About</a>
+                        </li>
+                        <li class="navbar_item">
+                            <a class="navbar_link" asp-area="" asp-controller="GalleryPhotoes" asp-action="Gallery">Gallery</a>
+                        </li>
+                        <li class="navbar_item">
+                            <a class="navbar_link" asp-area="" asp-controller="Contacts" asp-action="Create">Contact</a>
+                        </li>
+                    }
+                </ul>
+                <partial name="_LoginPartial" />
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+
+        <!--Footer Start-->
+    <div class="footer_container">
+      <div class="footer_links">
+        <a href="https://www.instagram.com/mg_photographymaria/" class="footer_link"><i class="fa fa-instagram" style="font-size: 35px"></i></a>
+        <a href="https://www.facebook.com/profile.php?id=100071790210937" class="footer_link" ><i class="fa fa-facebook-square" style="font-size: 35px"></i></a>
+        <a href="" class="footer_link"><i class="fa fa-youtube-square" style="font-size: 35px" ></i></a>
+      </div>
+    </div>
+    <div class="footer_logo">
+      <a href="#" class="logo_footer"><i class="fa fa-camera-retro" style="font-size: 48px"></i>PhotoM.G.</a>
+    </div>
+    <!--Footer End-->
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

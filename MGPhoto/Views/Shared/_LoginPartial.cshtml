@@ -1,0 +1,55 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+<style>
+.navbar__links {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 125px;
+  text-decoration: none;
+  height: 100%;
+  transition: all 1s ease;
+  background:transparent;
+}
+.navbar__links:hover{
+  color: black;
+  font-size: 110%;
+}
+.navbar__item {
+  height: 80px;
+}
+.navbar__menu {
+  display: flex;
+  align-items: center;
+  list-style: none;
+}
+#logout{
+    border:transparent;
+}
+</style>
+
+<ul class="navbar__menu">
+@if (SignInManager.IsSignedIn(User))
+{
+    <li class="navbar__item">
+        <a id="manage" class="navbar__links" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><i class="fa fa-address-card" style="font-size: 36px; color:white "></i></a>
+    </li>
+    <li class="navbar__item">
+        <form id="logoutForm" class="navbar__links" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <button id="logout" type="submit" class="navbar__links">Logout</button>
+        </form>
+    </li>
+}
+else
+{
+    <li class="navbar__item">
+        <a class="navbar__links" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
+    </li>
+    <li class="navbar__item">
+        <a class="navbar__links" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+    </li>
+}
+</ul>

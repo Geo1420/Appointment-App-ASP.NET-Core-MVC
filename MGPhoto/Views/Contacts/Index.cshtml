@@ -1,0 +1,42 @@
+﻿@model IEnumerable<MGPhoto.Models.Contact>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Message)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateTime_contact)
+            </th>
+            <th>
+                <label>Name</label>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Message)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateTime_contact)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailUser)
+            </td>
+            <td>
+                <a asp-controller="ReplyMessages" asp-action="Create" asp-route-id="@item.Id_contact"> <i class="fa fa-reply"></i> Reply</a> |
+                <a asp-action="Details" asp-route-id="@item.Id_contact">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id_contact">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
